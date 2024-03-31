@@ -4,6 +4,9 @@ import "./App.css";
 import authService from "./appwrite/auth";
 import { login, logout } from "./store/authSlice";
 
+import header from "./components/Header/header.jsx";
+import footer from "./components/Footer/footer.jsx";
+
 function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
@@ -21,13 +24,22 @@ function App() {
       .finally(()=>{setLoading(false)});
   }, []);
 
-  if(loading){
+  if(loading == true){
       return 
-      <div className="">
+      <div className="min-h-screen flex flex-wrap  content-between bg-gray-400">
+        <div className='w-full block'>
+          <header/>
+          <main>
+            {/* <Outlet/> */}
+          </main>
+          <footer/>
+        </div>
       </div>
   }
   else{
-
+    return <div>
+      Hello World
+    </div>
   }
 }
 
