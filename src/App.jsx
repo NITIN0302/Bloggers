@@ -3,9 +3,9 @@ import { useDispatch } from "react-redux";
 import "./App.css";
 import authService from "./appwrite/auth";
 import { login, logout } from "./store/authSlice";
-
 import Header from "./Component/Header/Header";
 import Footer from "./Component/Footer/Footer";
+import { Outlet } from "react-router-dom";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -21,20 +21,26 @@ function App() {
           dispatch(logout());
         }
       })
-      .finally(()=>{setLoading(false)});
+      .finally(() => {
+        setLoading(false);
+      });
   }, [loading]);
 
   console.log(loading);
 
-  return !loading ? <div className="min-h-screen flex flex-wrap  content-between bg-gray-400">
-        <div className='w-full block'>
-          <Header/>
-          <main>
-            {/* <Outlet/> */}
-          </main>
-          <Footer/>
-        </div>
-      </div> :<div>Hello World</div>
+  return !loading ? (
+    <div className="min-h-screen flex flex-wrap  content-between bg-gray-400">
+      <div className="w-full block">
+        <Header />
+        <main>
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
+    </div>
+  ) : (
+    <div>Hello World</div>
+  );
 }
 
 export default App;
